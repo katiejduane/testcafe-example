@@ -1,4 +1,6 @@
-import { Selector } from 'testcafe';
+import {
+  Selector
+} from 'testcafe';
 
 fixture('Getting Started')
   .page('https://github.com');
