@@ -42,22 +42,24 @@ test('New Job : happy path', async (t) => {
 });
 
 
-test('New Job : partial entry', async (t) => {
-  // click add job button
-  await t
-    .click(addJobButton)
-    .expect(title.innerText).eql('Add Job');
-  // fill out form
-  await t
-    .typeText('input[name="title"]', 'Java Developer')
-    .typeText('textarea[name="description"]', 'Write some Java')
-    .click(submitButton)
-  // check title, table rows, and new job exists
-  await t
-    .expect(title.innerText).eql('All Jobs')
-    .expect(tableRows.count).eql(5)
-    .expect(Selector('tbody > tr').withText('Java Developer').exists).ok();
-});
+// test('New Job : partial entry', async (t) => {
+//   // click add job button
+//   await t
+//     .click(addJobButton)
+//     .expect(title.innerText).eql('Add Job');
+//   // fill out form
+//   await t
+//     .typeText('input[name="title"]', 'Java Developer')
+//     .typeText('textarea[name="description"]', 'Write some Java')
+//     .typeText('input[name="company"]', 'Real Java')
+//     .typeText('input[name="email"]', 'michael@realjava.com')
+//     .click(submitButton)
+//   // check title, table rows, and new job exists
+//   await t
+//     .expect(title.innerText).eql('All Jobs')
+//     .expect(tableRows.count).eql(5)
+//     .expect(Selector('tbody > tr').withText('Java Developer').exists).ok();
+// });
 
 
 test('Update Job', async (t) => {
@@ -76,9 +78,9 @@ test('Update Job', async (t) => {
     .typeText('input[name="company"]', 'test', {
       replace: true
     })
-    .typeText('input[name="email"]', 't@t.com', {
-      replace: true
-    })
+    // .typeText('input[name="email"]', 't@t.com', {
+    //   replace: true
+    // })
     .click(submitButton)
   // check title, table rows, and updated job exists
   await t
@@ -88,22 +90,22 @@ test('Update Job', async (t) => {
     .expect(Selector('tbody > tr').withText('testing an update').exists).ok();
 });
 
-// test('Delete Job', async (t) => {
-//   // click delete button
-//   await t
-//     .setNativeDialogHandler(() => true) // => press ok
-//     .click(clayDryerJob.find('a.btn.btn-danger'))
-//   // check title, table rows, and updated job exists
-//   await t
-//     .expect(title.innerText).eql('All Jobs')
-//     .expect(tableRows.count).eql(3) // why 3?
-//     .expect(clayDryerJob.exists).notOk();
-//   // click delete button
-//   await t
-//     .setNativeDialogHandler(() => false) // => press cancel
-//     .click(tableRows.find('a.btn.btn-danger'))
-//   // check title, table rows, and updated job exists
-//   await t
-//     .expect(title.innerText).eql('All Jobs')
-//     .expect(tableRows.count).eql(3) // why 3?
-// });
+test('Delete Job', async (t) => {
+  // click delete button
+  await t
+    .setNativeDialogHandler(() => true) // => press ok
+    .click(clayDryerJob.find('a.btn.btn-danger'))
+  // check title, table rows, and updated job exists
+  await t
+    .expect(title.innerText).eql('All Jobs')
+    .expect(tableRows.count).eql(3) // why 3?
+    .expect(clayDryerJob.exists).notOk();
+  // click delete button
+  await t
+    .setNativeDialogHandler(() => false) // => press cancel
+    .click(tableRows.find('a.btn.btn-danger'))
+  // check title, table rows, and updated job exists
+  await t
+    .expect(title.innerText).eql('All Jobs')
+    .expect(tableRows.count).eql(3) // why 3?
+});
